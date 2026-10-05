@@ -3,7 +3,7 @@ Pipe operator `|>` example:
 ```fpon
 let append_space = num -> str -> str + (" " * num) in
 "prefix:" |> append_space 3
-# Rwsult: "prefix:   "
+# Result: "prefix:   "
 ```
 
 Fallback operator `<|>` example:
@@ -39,5 +39,5 @@ let plants = {
   "broccoli" | "carrot" -> "This is a vegetable.",
 } in
 plants? "lemon"
-#Result: null
+# Result: null
 ```
