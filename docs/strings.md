@@ -2,13 +2,13 @@
 
 ## Standard Strings
 
-String literals are enclosed in double quotes. The backslash (`\`) is used for escaping.
+String literals are enclosed in double quotes (`"`). The backslash (`\`) is used for escaping.
 
 ```fpon
 "Hello\nWorld"
 ```
 
-Standard escape sequences are supported, including `\n`, `\t`, `\\`, `\"`, and `\'`.
+Standard escape sequences are supported, including `\n`, `\t`, `\\`, and `\"`.
 
 String literals must be written on a single line. Literal line breaks inside a string are a syntax error; use the escape sequence `\n` instead.
 
