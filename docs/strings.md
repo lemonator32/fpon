@@ -97,30 +97,27 @@ userProfile.account.preferences.theme == .dark    # true
 
 ## Raw Multi-line Strings
 
-Outside of a regular string literal, the `\\` prefix introduces a **raw multi-line string** (sometimes called a doc string).
+The single quote `'` prefix introduces a **raw multi-line string** (sometimes called a doc string).
 
 ### Core Rules
 
-- **No escape sequences**  
+- **No escape sequences:**  
   Everything is taken literally. Sequences such as `\n` or `\t` appear in the resulting string as a backslash followed by the letter `n` or `t`.
-
-- **Implicit newlines**  
+- **Implicit newlines:**  
   The compiler inserts a newline (`\n`) after every line except the final one.
-
-- **Stripped leading whitespace**  
-  Indentation that appears before the `\\` is ignored, so you can indent the block to match the surrounding code without adding unwanted spaces to the string.
-
-- **Line termination**  
-  A multi-line string continues until a line that does not begin with `\\`. An empty `\\` line (nothing after the prefix) produces a blank line in the output.
+- **Stripped leading whitespace:**  
+  Indentation that appears before the `'` is ignored, so you can indent the block to match the surrounding code without adding unwanted spaces to the string.
+- **Line termination:**  
+  A multi-line string continues until a line that does not begin with `'`. An empty `'` line (nothing after the prefix) produces a blank line in the output.
 
 ### Basic Example
 
 ```fpon
 # The compiler treats the following as a single string containing embedded newlines
 let text =
-  \\Line 1: Hello World!
-  \\Line 2: Escape sequences like \n are treated literally.
-  \\Line 3: This syntax is reminiscent of line comments.
+  'Line 1: Hello World!
+  'Line 2: Escape sequences like \n are treated literally.
+  'Line 3: This syntax is reminiscent of line comments.
 in text
 ```
 
@@ -131,13 +128,13 @@ The primary purpose of raw multi-line strings is to embed documents (HTML, shell
 ```fpon
 {
   "html_template" ->
-    \\<!DOCTYPE html>
-    \\<html>
-    \\  <body>
-    \\    <h1>Hello From FPON</h1>
-    \\  </body>
-    \\</html>
-  ,  # Note: the comma must appear on the line after the final \\ line
+    '<!DOCTYPE html>
+    '<html>
+    '  <body>
+    '    <h1>Hello From FPON</h1>
+    '  </body>
+    '</html>
+  ,  # Note: the comma must appear on the line after the final ' line
   "file_name" -> "index.html",
   "output_directory" -> "./dist/public",
   "file_size_bytes" -> 104,
@@ -168,15 +165,15 @@ The primary purpose of raw multi-line strings is to embed documents (HTML, shell
 
   # Embedded shell script
   "run" ->
-    \\CURL="/bin/curl"
-    \\JQ="/bin/jq"
-    \\
-    \\echo "Checking GitHub API Status..."
-    \\
-    \\# Fetch data using the tools defined above
-    \\$CURL -s "https://api.github.com"
-    \\
-    \\echo ""
-    \\echo "Script executed successfully!"
+    'CURL="/bin/curl"
+    'JQ="/bin/jq"
+    '
+    'echo "Checking GitHub API Status..."
+    '
+    '# Fetch data using the tools defined above
+    '$CURL -s "https://api.github.com"
+    '
+    'echo ""
+    'echo "Script executed successfully!"
 }
 ```
