@@ -127,7 +127,7 @@ The primary purpose of raw multi-line strings is to embed documents (HTML, shell
 
 ```fpon
 {
-  "html_template" ->
+  .html_template ->
     '<!DOCTYPE html>
     '<html>
     '  <body>
@@ -135,36 +135,36 @@ The primary purpose of raw multi-line strings is to embed documents (HTML, shell
     '  </body>
     '</html>
   ,  # Note: the comma must appear on the line after the final ' line
-  "file_name" -> "index.html",
-  "output_directory" -> "./dist/public",
-  "file_size_bytes" -> 104,
-  "created_at" -> "2026-10-02T18:35:00Z",
-  "updated_at" -> "2026-10-02T18:35:00Z"
+  .file_name -> "index.html",
+  .output_directory -> "./dist/public",
+  .file_size_bytes -> 104,
+  .created_at -> "2026-10-02T18:35:00Z",
+  .updated_at -> "2026-10-02T18:35:00Z",
 }
 ```
 
 ```fpon
 {
-  "name" -> "API Health Check Pipeline",
-  "version" -> "1.2.0",
+  .name -> "API Health Check Pipeline",
+  .version -> "1.2.0",
 
-  "metadata" -> {
-    "description" -> "Automated script to verify external service availability",
-    "author" -> "DevOps Team"
+  .metadata -> {
+    .description -> "Automated script to verify external service availability",
+    .author -> "DevOps Team",
   },
 
-  "config" -> {
-    "timeout_minutes" -> 5,
-    "retry_attempts" -> 3,
-    "allow_failure" -> false,
-    "environment" -> {
-      "STAGE" -> "production",
-      "LOG_LEVEL" -> "DEBUG"
-    }
+  .config -> {
+    .timeout_minutes -> 5,
+    .retry_attempts -> 3,
+    .allow_failure -> false,
+    .environment -> {
+      .STAGE -> "production",
+      .LOG_LEVEL -> "DEBUG",
+    },
   },
 
   # Embedded shell script
-  "run" ->
+  .run ->
     'CURL="/bin/curl"
     'JQ="/bin/jq"
     '
