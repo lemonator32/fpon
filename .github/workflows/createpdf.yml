@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install pandoc and weasyprint
-      run: sudo apt-get update && sudo apt-get install -y pandoc python3-pip && pip install weasyprint
+    - name: Install pandoc, weasyprint, and pypdf
+      run: sudo apt-get update && sudo apt-get install -y pandoc python3-pip && pip install weasyprint pypdf
     - name: Convert markdown to PDF
       run: |
         mkdir -p tmp
@@ -20,6 +20,25 @@ jobs:
           filename=$(basename "$file" .md)
           pandoc "$file" -o "tmp/$filename.pdf" --pdf-engine=weasyprint
         done
+    - name: Merge PDFs
+      run: |
+        python3 << 'EOF'
+        from pypdf import PdfWriter
+        import os
+        import glob
+
+        pdf_files = sorted(glob.glob('tmp/*.pdf'))
+        merger = PdfWriter()
+
+        for pdf in pdf_files:
+          with open(pdf, 'rb') as f:
+            merger.append(f)
+
+        with open('tmp/combined.pdf', 'wb') as output:
+          merger.write(output)
+
+        print(f"Combined PDF created: tmp/combined.pdf")
+        EOF
     - uses: actions/upload-artifact@v4
       with:
         name: platform-architecture-docs
