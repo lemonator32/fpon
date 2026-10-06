@@ -27,17 +27,20 @@ jobs:
         import os
         import glob
 
-        pdf_files = sorted(glob.glob('tmp/*.pdf'))
+        pdf_files = sorted(
+            f for f in glob.glob('tmp/*.pdf') 
+            if os.path.basename(f) != 'docs.pdf'
+        )
         merger = PdfWriter()
 
         for pdf in pdf_files:
           with open(pdf, 'rb') as f:
             merger.append(f)
 
-        with open('tmp/combined.pdf', 'wb') as output:
+        with open('tmp/docs.pdf', 'wb') as output:
           merger.write(output)
 
-        print(f"Combined PDF created: tmp/combined.pdf")
+        print(f"Combined PDF created: tmp/docs.pdf")
         EOF
     - uses: actions/upload-artifact@v4
       with:
