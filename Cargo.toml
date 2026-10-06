@@ -1,0 +1,10 @@
+[package]
+name = "fpon"
+version = "0.1.0"
+edition = "2021"
+authors = ["lemonator32"]
+description = "Prototype used for testing"
+license = "MIT"
+repository = "https://github.com/lemonator32/fpon"
+
+[dependencies]
