@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install pandoc
-      run: sudo apt-get install -y pandoc
+    - name: Install pandoc and LaTeX
+      run: sudo apt-get update && sudo apt-get install -y pandoc texlive-latex-base texlive-latex-extra
     - name: Convert markdown to PDF
       run: |
         mkdir -p tmp
         for file in docs/*.md; do
           filename=$(basename "$file" .md)
-          pandoc "$file" -o "tmp/$filename.pdf"
+          pandoc "$file" -o "tmp/$filename.pdf" --pdf-engine=pdflatex
         done
     - uses: actions/upload-artifact@v4
       with:
