@@ -11,11 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: mkrakowitzer/actions-makepdfs@master
-      if: github.ref == 'refs/heads/main'
-      with:
-        markdown_dir: docs
-        output_dir: tmp
+    - name: Install pandoc
+      run: sudo apt-get install -y pandoc
+    - name: Convert markdown to PDF
+      run: |
+        mkdir -p tmp
+        for file in docs/*.md; do
+          filename=$(basename "$file" .md)
+          pandoc "$file" -o "tmp/$filename.pdf"
+        done
     - uses: actions/upload-artifact@v4
       with:
         name: platform-architecture-docs
